@@ -1,15 +1,11 @@
 package cmd
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"log"
-	"net/http"
-	"net/url"
-	"regexp"
 
+	"github.com/clockworksoul/cog2/client"
 	"github.com/clockworksoul/cog2/data/rest"
 	"github.com/spf13/cobra"
 )
@@ -50,9 +46,9 @@ func GetBootstrapCmd() *cobra.Command {
 }
 
 func bootstrapCmd(cmd *cobra.Command, args []string) error {
-	hostURL, err := bootstrapCmdParseServer(args[0])
+	client, err := client.Connect(args[0])
 	if err != nil {
-		log.Fatalln(err)
+		log.Fatal(err)
 	}
 
 	// Does the user want a specific email?
@@ -70,14 +66,12 @@ func bootstrapCmd(cmd *cobra.Command, args []string) error {
 	// The default profile name is the hostname of the Cog server
 	profile := flagBootstrapProfile
 	if profile == "" {
-		profile = hostURL.Hostname()
+		profile = client.Host().Hostname()
 	}
 
 	// Does the user want a specific username?
 	// If not, Cog will apply the default ("admin") and return it
 	username := flagBootstrapUser
-
-	endpointURL := fmt.Sprintf("%s/v2/bootstrap", hostURL.String())
 
 	user := rest.User{
 		Email:    email,
@@ -86,60 +80,13 @@ func bootstrapCmd(cmd *cobra.Command, args []string) error {
 		Username: username,
 	}
 
-	postBytes, err := json.Marshal(user)
+	user, err = client.Bootstrap(user)
 	if err != nil {
-		log.Fatalln(err)
+		log.Fatal(err)
 	}
 
-	resp, err := http.Post(endpointURL, "application/json", bytes.NewBuffer(postBytes))
-	if err != nil {
-		log.Fatalln(err)
-	}
-
-	switch resp.StatusCode {
-	case http.StatusOK: // Everything is swell.
-	case http.StatusConflict:
-		fmt.Printf("Server %s has already been bootstrapped.\n", hostURL.String())
-		return nil
-	case http.StatusInternalServerError:
-		fmt.Println("Internal server error. Check the server logs for details.")
-		return nil
-	default:
-		bytes, _ := ioutil.ReadAll(resp.Body)
-		fmt.Printf("Unexpected response: %d %v\n", resp.StatusCode, string(bytes))
-		return nil
-	}
-
-	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		log.Fatalln(err)
-	}
-
-	// Re-using "user" instance. Sorry.
-	err = json.Unmarshal(body, &user)
-
-	log.Println(user)
+	bytes, _ := json.MarshalIndent(user, "", "  ")
+	fmt.Println(string(bytes))
 
 	return nil
-}
-
-func bootstrapCmdParseServer(serverURLArg string) (*url.URL, error) {
-	serverURLString := serverURLArg
-
-	// Does the URL have a prefix? If not, assume 'http://'
-	matches, err := regexp.MatchString("^[a-z0-9]+://.*", serverURLString)
-	if err != nil {
-		return nil, err
-	}
-	if !matches {
-		serverURLString = "http://" + serverURLString
-	}
-
-	// Parse the resulting URL
-	serverURL, err := url.Parse(serverURLString)
-	if err != nil {
-		return nil, err
-	}
-
-	return serverURL, nil
 }
