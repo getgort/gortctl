@@ -7,7 +7,7 @@ import (
 const (
 	userUse   = "user"
 	userShort = "Perform operations on users"
-	userLong  = "Allows you to create or delete users."
+	userLong  = "Allows you to perform user administration."
 )
 
 // GetUserCmd user
@@ -17,6 +17,8 @@ func GetUserCmd() *cobra.Command {
 		Short: userShort,
 		Long:  userLong,
 	}
+
+	cmd.AddCommand(GetUserListCmd())
 
 	return cmd
 }

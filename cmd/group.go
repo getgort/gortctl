@@ -7,7 +7,7 @@ import (
 const (
 	groupUse   = "group"
 	groupShort = "Perform operations on groups"
-	groupLong  = "Allows you to create or delete groups."
+	groupLong  = "Allows you to perform group administration."
 )
 
 // GetGroupCmd group
@@ -17,6 +17,8 @@ func GetGroupCmd() *cobra.Command {
 		Short: groupShort,
 		Long:  groupLong,
 	}
+
+	cmd.AddCommand(GetUserListCmd())
 
 	return cmd
 }

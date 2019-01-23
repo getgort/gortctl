@@ -30,6 +30,8 @@ func init() {
 	rootCmd.AddCommand(cmd.GetGroupCmd())
 	rootCmd.AddCommand(cmd.GetUserCmd())
 	rootCmd.SetVersionTemplate("Cogctl version v" + Version + "\n")
+
+	rootCmd.PersistentFlags().StringVarP(&cmd.FlagCogProfile, "profile", "P", "", "Cog profile to use")
 }
 
 // Execute executes
