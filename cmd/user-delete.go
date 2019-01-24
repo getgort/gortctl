@@ -39,14 +39,14 @@ func userDeleteCmd(cmd *cobra.Command, args []string) error {
 		return printError(err)
 	}
 
-	fmt.Printf("Deleting user %s (%s)\n", user.Username, user.Password)
+	fmt.Printf("Deleting user %s (%s)... ", user.Username, user.Email)
 
 	err = client.UserDelete(user.Username)
 	if err != nil {
 		return printError(err)
 	}
 
-	fmt.Println("Delete successful")
+	fmt.Println("Successful.")
 
 	return nil
 }

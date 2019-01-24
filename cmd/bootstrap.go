@@ -37,7 +37,7 @@ func GetBootstrapCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&flagBootstrapEmail, "email", "e", "admin@cog", "Email for the bootstrapped user")
 	cmd.Flags().StringVarP(&flagBootstrapName, "name", "n", "Cog Administrator", "Full name of the bootstrapped user")
 	cmd.Flags().StringVarP(&flagBootstrapPassword, "password", "p", "", "Password for bootstrapped user")
-	cmd.Flags().StringVarP(&flagBootstrapUser, "user", "u", "admin", "Username for the bootstrapped user")
+	cmd.Flags().StringVarP(&flagBootstrapUser, "username", "u", "admin", "Username for the bootstrapped user")
 
 	return cmd
 }

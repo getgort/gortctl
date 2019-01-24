@@ -18,6 +18,7 @@ func GetGroupCmd() *cobra.Command {
 		Long:  groupLong,
 	}
 
+	cmd.AddCommand(GetGroupCreateCmd())
 	cmd.AddCommand(GetGroupDeleteCmd())
 	cmd.AddCommand(GetGroupInfoCmd())
 	cmd.AddCommand(GetGroupListCmd())

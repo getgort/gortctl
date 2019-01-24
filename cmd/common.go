@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/clockworksoul/cog2/data/rest"
 )
@@ -22,9 +23,21 @@ func groupNames(groups []rest.Group) []string {
 	return names
 }
 
-func printError(err error) error {
-	fmt.Fprintf(os.Stderr, "Error: %s\n", err.Error())
+func printError(a interface{}) error {
+	switch v := a.(type) {
+	case error:
+		// Remove that annoying extra newline
+		msg := strings.TrimSpace(v.Error())
+		fmt.Fprintf(os.Stderr, "%s\n", msg)
+	default:
+		fmt.Fprintf(os.Stderr, "%v\n", a)
+	}
 	return nil
+}
+
+func printErrorf(format string, a interface{}) error {
+	_, err := fmt.Fprintf(os.Stderr, format, a)
+	return err
 }
 
 func userNames(users []rest.User) []string {

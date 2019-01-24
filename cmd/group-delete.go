@@ -39,14 +39,14 @@ func groupDeleteCmd(cmd *cobra.Command, args []string) error {
 		return printError(err)
 	}
 
-	fmt.Printf("Deleting group %s\n", group.Name)
+	fmt.Printf("Deleting group %s... ", group.Name)
 
 	err = client.GroupDelete(group.Name)
 	if err != nil {
 		return printError(err)
 	}
 
-	fmt.Println("Delete successful")
+	fmt.Println("Successful")
 
 	return nil
 }
