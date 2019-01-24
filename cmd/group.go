@@ -18,7 +18,9 @@ func GetGroupCmd() *cobra.Command {
 		Long:  groupLong,
 	}
 
-	cmd.AddCommand(GetUserListCmd())
+	cmd.AddCommand(GetGroupDeleteCmd())
+	cmd.AddCommand(GetGroupInfoCmd())
+	cmd.AddCommand(GetGroupListCmd())
 
 	return cmd
 }

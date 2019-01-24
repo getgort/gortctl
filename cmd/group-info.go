@@ -51,7 +51,7 @@ func groupInfoCmd(cmd *cobra.Command, args []string) error {
 Users  %s
 `
 
-	fmt.Printf(format, groupname, strings.Join(userNames(users), ""))
+	fmt.Printf(format, groupname, strings.Join(userNames(users), ", "))
 
 	return nil
 }

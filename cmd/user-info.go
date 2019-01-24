@@ -2,8 +2,10 @@ package cmd
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/clockworksoul/cog2/client"
+	"github.com/clockworksoul/cog2/data/rest"
 	"github.com/spf13/cobra"
 )
 
@@ -43,10 +45,12 @@ func userInfoCmd(cmd *cobra.Command, args []string) error {
 		return printError(err)
 	}
 
-	groups, err := client.UserGroupList(username)
-	if err != nil {
-		return printError(err)
-	}
+	groups := []rest.Group{}
+	// TODO
+	// groups, err := client.UserGroupList(username)
+	// if err != nil {
+	// 	return printError(err)
+	// }
 
 	const format = `Name       %s
 Full Name  %s
@@ -54,7 +58,7 @@ Email      %s
 Groups     %s
 `
 
-	fmt.Printf(format, user.Username, user.FullName, user.Email, groupNames(groups))
+	fmt.Printf(format, user.Username, user.FullName, user.Email, strings.Join(groupNames(groups), ", "))
 
 	return nil
 }

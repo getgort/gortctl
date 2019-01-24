@@ -18,6 +18,8 @@ func GetUserCmd() *cobra.Command {
 		Long:  userLong,
 	}
 
+	cmd.AddCommand(GetUserDeleteCmd())
+	cmd.AddCommand(GetUserInfoCmd())
 	cmd.AddCommand(GetUserListCmd())
 
 	return cmd
