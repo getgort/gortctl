@@ -11,7 +11,7 @@ import (
 const (
 	rootShort = "Cogctl is a CLI tool for administering a Cog2 chatops server installation"
 
-	rootLong = `Cogctl is a CLI tool for administering a Cog2 chatops server installation.
+	rootLong = `Manage Cog via its REST API on the command line.
 
 Did you find a bug or have a suggestion for a new feature? Create an issue at
 https://github.com/clockworksoul/cog2/issues.

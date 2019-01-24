@@ -10,6 +10,24 @@ const (
 	userLong  = "Allows you to perform user administration."
 )
 
+// # cogctl user --help
+// Usage: cogctl user [OPTIONS] COMMAND [ARGS]...
+//
+//   Manage Cog users.
+//
+//   If invoked without a subcommand, lists all the users on the server.
+//
+// Options:
+//   --help  Show this message and exit.
+//
+// Commands:
+//   create                  Create a new user.
+//   delete                  Deletes a user.
+//   info                    Get info about a specific user by username.
+//   password-reset          Reset user password with a token.
+//   password-reset-request  Request a password reset.
+//   update                  Updates an existing user.
+
 // GetUserCmd user
 func GetUserCmd() *cobra.Command {
 	cmd := &cobra.Command{

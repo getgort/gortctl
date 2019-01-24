@@ -10,7 +10,7 @@ import (
 
 const (
 	bootstrapUse   = "bootstrap"
-	bootstrapShort = "Bootstrap a new server"
+	bootstrapShort = "Bootstrap a Cog serverr"
 	bootstrapLong  = `Bootstrap can be used on a brand new server to create the administrative user (admin).
 	
 It will only work on an instance that doesn't yet have any users defined.`
