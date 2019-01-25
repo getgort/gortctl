@@ -8,25 +8,25 @@ import (
 )
 
 const (
-	groupAddUserUse   = "add-user"
-	groupAddUserShort = "Add a user to an existing group"
-	groupAddUserLong  = "Add a user to an existing group."
+	groupAddUse   = "add"
+	groupAddShort = "Add a user to an existing group"
+	groupAddLong  = "Add a user to an existing group."
 )
 
-// GetGroupAddUserCmd is a command
-func GetGroupAddUserCmd() *cobra.Command {
+// GetGroupAddCmd is a command
+func GetGroupAddCmd() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   groupAddUserUse,
-		Short: groupAddUserShort,
-		Long:  groupAddUserLong,
-		RunE:  groupAddUserCmd,
+		Use:   groupAddUse,
+		Short: groupAddShort,
+		Long:  groupAddLong,
+		RunE:  groupAddCmd,
 		Args:  cobra.ExactArgs(2),
 	}
 
 	return cmd
 }
 
-func groupAddUserCmd(cmd *cobra.Command, args []string) error {
+func groupAddCmd(cmd *cobra.Command, args []string) error {
 	groupname := args[0]
 	username := args[1]
 
