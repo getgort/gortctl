@@ -30,12 +30,12 @@ func userListCmd(cmd *cobra.Command, args []string) error {
 
 	client, err := client.Connect(FlagCogProfile)
 	if err != nil {
-		return printError(err)
+		return err
 	}
 
 	users, err := client.UserList()
 	if err != nil {
-		return printError(err)
+		return err
 	}
 
 	fmt.Printf(format, "USERNAME", "FULL NAME", "EMAIL ADDRESS")

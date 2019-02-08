@@ -32,12 +32,12 @@ func groupAddCmd(cmd *cobra.Command, args []string) error {
 
 	client, err := client.Connect(FlagCogProfile)
 	if err != nil {
-		return printError(err)
+		return err
 	}
 
 	err = client.GroupMemberAdd(groupname, username)
 	if err != nil {
-		return printError(err)
+		return err
 	}
 
 	fmt.Printf("User added to %s: %s\n", groupname, username)

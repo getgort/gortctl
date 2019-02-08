@@ -2,8 +2,12 @@ package main
 
 import (
 	"fmt"
+	"net/http"
 	"os"
+	"reflect"
 
+	"github.com/clockworksoul/cog2/client"
+	cogerr "github.com/clockworksoul/cog2/errors"
 	"github.com/clockworksoul/cogctl2/cmd"
 	"github.com/spf13/cobra"
 )
@@ -19,14 +23,18 @@ https://github.com/clockworksoul/cog2/issues.
 )
 
 var rootCmd = &cobra.Command{
-	Use:     "cogctl",
-	Short:   rootShort,
-	Long:    rootLong,
-	Version: Version,
+	Use:                        "cogctl",
+	Short:                      rootShort,
+	Long:                       rootLong,
+	Version:                    Version,
+	SilenceUsage:               true,
+	SilenceErrors:              true,
+	SuggestionsMinimumDistance: 2,
 }
 
 func init() {
 	rootCmd.AddCommand(cmd.GetBootstrapCmd())
+	rootCmd.AddCommand(cmd.GetBundleCmd())
 	rootCmd.AddCommand(cmd.GetGroupCmd())
 	rootCmd.AddCommand(cmd.GetUserCmd())
 	rootCmd.SetVersionTemplate("Cogctl version v" + Version + "\n")
@@ -37,7 +45,56 @@ func init() {
 // Execute executes
 func Execute() {
 	if err := rootCmd.Execute(); err != nil {
-		fmt.Println(err)
+		printErr(err)
 		os.Exit(1)
+	}
+}
+
+func printErr(err error) error {
+	var msg string
+
+	switch {
+	case reflect.TypeOf(err) == reflect.TypeOf(cogerr.NestedError{}):
+		nerr := err.(cogerr.NestedError)
+		fmt.Fprintln(os.Stderr, "Error:", nerr.Message)
+
+		if true { // TODO Add "verbose" flag
+			suberr := nerr.Err
+
+			for reflect.TypeOf(suberr) == reflect.TypeOf(cogerr.NestedError{}) {
+				nerr = suberr.(cogerr.NestedError)
+				suberr = nerr.Err
+
+				fmt.Fprintf(os.Stderr, "Caused by: %s\n", nerr.Message)
+			}
+
+			fmt.Fprintf(os.Stderr, "Caused by: %s\n", suberr.Error())
+		}
+	case reflect.TypeOf(err) == reflect.TypeOf(client.Error{}):
+		cerr := err.(client.Error)
+		msg = getClientErrorMessage(cerr)
+		fmt.Fprintln(os.Stderr, "Error:", msg)
+	default:
+		msg = err.Error()
+		fmt.Fprintln(os.Stderr, "Error:", msg)
+	}
+
+	return err
+}
+
+func getClientErrorMessage(cerr client.Error) string {
+	status := cerr.Status()
+
+	switch status {
+	case 0:
+		return fmt.Sprintf("Could not establish HTTP connection to %s. "+
+			"Please check your host, user, and password settings.",
+			cerr.Profile().URLString)
+
+	case http.StatusNoContent:
+		return "No items found"
+
+	default:
+		return fmt.Sprintf("%d %s", status, cerr.Error())
 	}
 }

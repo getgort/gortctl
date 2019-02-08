@@ -30,7 +30,7 @@ func GetUserInfoCmd() *cobra.Command {
 func userInfoCmd(cmd *cobra.Command, args []string) error {
 	client, err := client.Connect(FlagCogProfile)
 	if err != nil {
-		return printError(err)
+		return err
 	}
 
 	//
@@ -41,12 +41,12 @@ func userInfoCmd(cmd *cobra.Command, args []string) error {
 
 	user, err := client.UserGet(username)
 	if err != nil {
-		return printError(err)
+		return err
 	}
 
 	groups, err := client.UserGroupList(username)
 	if err != nil {
-		return printError(err)
+		return err
 	}
 
 	const format = `Name       %s

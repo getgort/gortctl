@@ -29,21 +29,21 @@ func GetGroupDeleteCmd() *cobra.Command {
 func groupDeleteCmd(cmd *cobra.Command, args []string) error {
 	client, err := client.Connect(FlagCogProfile)
 	if err != nil {
-		return printError(err)
+		return err
 	}
 
 	groupname := args[0]
 
 	group, err := client.GroupGet(groupname)
 	if err != nil {
-		return printError(err)
+		return err
 	}
 
 	fmt.Printf("Deleting group %s... ", group.Name)
 
 	err = client.GroupDelete(group.Name)
 	if err != nil {
-		return printError(err)
+		return err
 	}
 
 	fmt.Println("Successful")

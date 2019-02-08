@@ -45,19 +45,18 @@ func GetUserCreateCmd() *cobra.Command {
 func userCreateCmd(cmd *cobra.Command, args []string) error {
 	username := args[0]
 
-	client, err := client.Connect(FlagCogProfile)
+	c, err := client.Connect(FlagCogProfile)
 	if err != nil {
-		return printError(err)
+		return err
 	}
 
 	// Only allow this operation if the user doesn't already exist.
-	exists, err := client.UserExists(username)
+	exists, err := c.UserExists(username)
 	if err != nil {
-		return printError(err)
+		return err
 	}
-
 	if exists {
-		return printErrorf("User %q already exists.\n", username)
+		return client.ErrResourceExists
 	}
 
 	user := rest.User{
@@ -67,9 +66,9 @@ func userCreateCmd(cmd *cobra.Command, args []string) error {
 		Username: username,
 	}
 
-	err = client.UserSave(user)
+	err = c.UserSave(user)
 	if err != nil {
-		return printError(err)
+		return err
 	}
 
 	fmt.Printf("User %q created.\n", user.Username)

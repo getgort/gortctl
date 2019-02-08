@@ -70,7 +70,7 @@ func bootstrapCmd(cmd *cobra.Command, args []string) error {
 
 	client, err := client.ConnectWithNewProfile(entry)
 	if err != nil {
-		return printError(err)
+		return err
 	}
 
 	user := rest.User{
@@ -83,7 +83,7 @@ func bootstrapCmd(cmd *cobra.Command, args []string) error {
 	// the new credentials to it.
 	user, err = client.Bootstrap(user)
 	if err != nil {
-		return printError(err)
+		return err
 	}
 
 	fmt.Printf("User %q created and credentials appended to cog config.\n", user.Username)

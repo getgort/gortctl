@@ -30,28 +30,27 @@ func GetGroupCreateCmd() *cobra.Command {
 func groupCreateCmd(cmd *cobra.Command, args []string) error {
 	groupname := args[0]
 
-	client, err := client.Connect(FlagCogProfile)
+	c, err := client.Connect(FlagCogProfile)
 	if err != nil {
-		return printError(err)
+		return err
 	}
 
 	// Only allow this operation if the group doesn't already exist.
-	exists, err := client.GroupExists(groupname)
+	exists, err := c.GroupExists(groupname)
 	if err != nil {
-		return printError(err)
+		return err
 	}
-
 	if exists {
-		return printErrorf("Group %s already exists.\n", groupname)
+		return client.ErrResourceExists
 	}
 
 	group := rest.Group{Name: groupname}
 
 	// Client GroupCreate will create the cog config if necessary, and append
 	// the new credentials to it.
-	err = client.GroupSave(group)
+	err = c.GroupSave(group)
 	if err != nil {
-		return printError(err)
+		return err
 	}
 
 	fmt.Printf("Group %q created.\n", group.Name)

@@ -30,12 +30,12 @@ func groupListCmd(cmd *cobra.Command, args []string) error {
 
 	client, err := client.Connect(FlagCogProfile)
 	if err != nil {
-		return printError(err)
+		return err
 	}
 
 	groups, err := client.GroupList()
 	if err != nil {
-		return printError(err)
+		return err
 	}
 
 	fmt.Printf(format, "GROUP NAME")
