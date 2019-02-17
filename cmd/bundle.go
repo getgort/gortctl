@@ -41,6 +41,7 @@ func GetBundleCmd() *cobra.Command {
 		Long:  bundleLong,
 	}
 
+	cmd.AddCommand(GetBundleInstallCmd())
 	cmd.AddCommand(GetBundleListCmd())
 
 	return cmd
