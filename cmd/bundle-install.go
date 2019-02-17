@@ -40,7 +40,7 @@ func bundleInstallCmd(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
-	err = c.BundleSave(bundle)
+	err = c.BundleInstall(bundle)
 	if err != nil {
 		return err
 	}
