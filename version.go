@@ -2,5 +2,5 @@ package main
 
 const (
 	// Version is the current version of cogctl.
-	Version = "0.3.3-dev.1"
+	Version = "v0.3.4-dev.0"
 )
