@@ -57,7 +57,7 @@ func bundleListCmd(cmd *cobra.Command, args []string) error {
 	for _, b := range bundles {
 		status := "Disabled"
 
-		if b.Active {
+		if b.Enabled {
 			status = "Enabled"
 		}
 
