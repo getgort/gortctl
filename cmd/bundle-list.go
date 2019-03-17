@@ -42,12 +42,12 @@ func GetBundleListCmd() *cobra.Command {
 func bundleListCmd(cmd *cobra.Command, args []string) error {
 	const format = "%-12s%-10s%s\n"
 
-	client, err := client.Connect(FlagCogProfile)
+	cogClient, err := client.Connect(FlagCogProfile)
 	if err != nil {
 		return err
 	}
 
-	bundles, err := client.BundleList()
+	bundles, err := cogClient.BundleList()
 	if err != nil {
 		return err
 	}

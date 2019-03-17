@@ -27,21 +27,21 @@ func GetUserDeleteCmd() *cobra.Command {
 }
 
 func userDeleteCmd(cmd *cobra.Command, args []string) error {
-	client, err := client.Connect(FlagCogProfile)
+	cogClient, err := client.Connect(FlagCogProfile)
 	if err != nil {
 		return err
 	}
 
 	username := args[0]
 
-	user, err := client.UserGet(username)
+	user, err := cogClient.UserGet(username)
 	if err != nil {
 		return err
 	}
 
 	fmt.Printf("Deleting user %s (%s)... ", user.Username, user.Email)
 
-	err = client.UserDelete(user.Username)
+	err = cogClient.UserDelete(user.Username)
 	if err != nil {
 		return err
 	}

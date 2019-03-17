@@ -49,12 +49,12 @@ func bundleInfoCmd(cmd *cobra.Command, args []string) error {
 }
 
 func doBundleInfoAll(name string) error {
-	client, err := client.Connect(FlagCogProfile)
+	cogClient, err := client.Connect(FlagCogProfile)
 	if err != nil {
 		return err
 	}
 
-	bundles, err := client.BundleListVersions(name)
+	bundles, err := cogClient.BundleListVersions(name)
 	if err != nil {
 		return err
 	}
@@ -92,12 +92,12 @@ func doBundleInfoAll(name string) error {
 }
 
 func doBundleInfoVersion(name, version string) error {
-	client, err := client.Connect(FlagCogProfile)
+	cogClient, err := client.Connect(FlagCogProfile)
 	if err != nil {
 		return err
 	}
 
-	bundle, err := client.BundleGet(name, version)
+	bundle, err := cogClient.BundleGet(name, version)
 	if err != nil {
 		return err
 	}

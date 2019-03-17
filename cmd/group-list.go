@@ -28,12 +28,12 @@ func GetGroupListCmd() *cobra.Command {
 func groupListCmd(cmd *cobra.Command, args []string) error {
 	const format = "%s\n"
 
-	client, err := client.Connect(FlagCogProfile)
+	cogClient, err := client.Connect(FlagCogProfile)
 	if err != nil {
 		return err
 	}
 
-	groups, err := client.GroupList()
+	groups, err := cogClient.GroupList()
 	if err != nil {
 		return err
 	}

@@ -40,7 +40,7 @@ func checkArgs(cmd *cobra.Command, args []string, argf cobra.PositionalArgs) err
 func groupInfoCmd(cmd *cobra.Command, args []string) error {
 	groupname := args[0]
 
-	client, err := client.Connect(FlagCogProfile)
+	cogClient, err := client.Connect(FlagCogProfile)
 	if err != nil {
 		return err
 	}
@@ -50,7 +50,7 @@ func groupInfoCmd(cmd *cobra.Command, args []string) error {
 	// (when there's more than one)
 	//
 
-	users, err := client.GroupMemberList(groupname)
+	users, err := cogClient.GroupMemberList(groupname)
 	if err != nil {
 		return err
 	}

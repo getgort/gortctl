@@ -28,12 +28,12 @@ func GetUserListCmd() *cobra.Command {
 func userListCmd(cmd *cobra.Command, args []string) error {
 	const format = "%-10s%-20s%s\n"
 
-	client, err := client.Connect(FlagCogProfile)
+	cogClient, err := client.Connect(FlagCogProfile)
 	if err != nil {
 		return err
 	}
 
-	users, err := client.UserList()
+	users, err := cogClient.UserList()
 	if err != nil {
 		return err
 	}

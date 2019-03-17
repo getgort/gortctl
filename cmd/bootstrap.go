@@ -68,7 +68,7 @@ func bootstrapCmd(cmd *cobra.Command, args []string) error {
 		URLString: args[0],
 	}
 
-	client, err := client.ConnectWithNewProfile(entry)
+	cogClient, err := client.ConnectWithNewProfile(entry)
 	if err != nil {
 		return err
 	}
@@ -81,7 +81,7 @@ func bootstrapCmd(cmd *cobra.Command, args []string) error {
 
 	// Client Bootstrap will create the cog config if necessary, and append
 	// the new credentials to it.
-	user, err = client.Bootstrap(user)
+	user, err = cogClient.Bootstrap(user)
 	if err != nil {
 		return err
 	}

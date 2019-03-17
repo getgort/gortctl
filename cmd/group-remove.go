@@ -30,12 +30,12 @@ func groupRemoveCmd(cmd *cobra.Command, args []string) error {
 	groupname := args[0]
 	username := args[1]
 
-	client, err := client.Connect(FlagCogProfile)
+	cogClient, err := client.Connect(FlagCogProfile)
 	if err != nil {
 		return err
 	}
 
-	err = client.GroupMemberDelete(groupname, username)
+	err = cogClient.GroupMemberDelete(groupname, username)
 	if err != nil {
 		return err
 	}

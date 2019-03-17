@@ -28,7 +28,7 @@ func GetUserInfoCmd() *cobra.Command {
 }
 
 func userInfoCmd(cmd *cobra.Command, args []string) error {
-	client, err := client.Connect(FlagCogProfile)
+	cogClient, err := client.Connect(FlagCogProfile)
 	if err != nil {
 		return err
 	}
@@ -39,12 +39,12 @@ func userInfoCmd(cmd *cobra.Command, args []string) error {
 
 	username := args[0]
 
-	user, err := client.UserGet(username)
+	user, err := cogClient.UserGet(username)
 	if err != nil {
 		return err
 	}
 
-	groups, err := client.UserGroupList(username)
+	groups, err := cogClient.UserGroupList(username)
 	if err != nil {
 		return err
 	}
