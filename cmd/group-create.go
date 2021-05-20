@@ -3,8 +3,8 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/clockworksoul/cog2/client"
-	"github.com/clockworksoul/cog2/data/rest"
+	"github.com/clockworksoul/gort/client"
+	"github.com/clockworksoul/gort/data/rest"
 	"github.com/spf13/cobra"
 )
 
@@ -30,7 +30,7 @@ func GetGroupCreateCmd() *cobra.Command {
 func groupCreateCmd(cmd *cobra.Command, args []string) error {
 	groupname := args[0]
 
-	c, err := client.Connect(FlagCogProfile)
+	c, err := client.Connect(FlagGortProfile)
 	if err != nil {
 		return err
 	}
@@ -46,7 +46,7 @@ func groupCreateCmd(cmd *cobra.Command, args []string) error {
 
 	group := rest.Group{Name: groupname}
 
-	// Client GroupCreate will create the cog config if necessary, and append
+	// Client GroupCreate will create the gort config if necessary, and append
 	// the new credentials to it.
 	err = c.GroupSave(group)
 	if err != nil {

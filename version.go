@@ -1,6 +1,6 @@
 package main
 
 const (
-	// Version is the current version of cogctl.
-	Version = "v0.4.0-dev.0"
+	// Version is the current version of gortctl.
+	Version = "v0.4.1-dev.0"
 )

@@ -1,9 +1,9 @@
-module github.com/clockworksoul/cogctl2
+module github.com/clockworksoul/gortctl
 
-go 1.12
+go 1.16
 
 require (
-	github.com/clockworksoul/cog2 v0.4.0-dev.0
-	github.com/spf13/cobra v0.0.5
-	gopkg.in/yaml.v2 v2.2.2
+	github.com/clockworksoul/gort v0.4.4-dev.0
+	github.com/spf13/cobra v1.1.3
+	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b
 )

@@ -3,7 +3,7 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/clockworksoul/cog2/client"
+	"github.com/clockworksoul/gort/client"
 	"github.com/spf13/cobra"
 )
 
@@ -27,21 +27,21 @@ func GetGroupDeleteCmd() *cobra.Command {
 }
 
 func groupDeleteCmd(cmd *cobra.Command, args []string) error {
-	cogClient, err := client.Connect(FlagCogProfile)
+	gortClient, err := client.Connect(FlagGortProfile)
 	if err != nil {
 		return err
 	}
 
 	groupname := args[0]
 
-	group, err := cogClient.GroupGet(groupname)
+	group, err := gortClient.GroupGet(groupname)
 	if err != nil {
 		return err
 	}
 
 	fmt.Printf("Deleting group %s... ", group.Name)
 
-	err = cogClient.GroupDelete(group.Name)
+	err = gortClient.GroupDelete(group.Name)
 	if err != nil {
 		return err
 	}

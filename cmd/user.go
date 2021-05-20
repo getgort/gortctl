@@ -10,10 +10,10 @@ const (
 	userLong  = "Allows you to perform user administration."
 )
 
-// # cogctl user --help
-// Usage: cogctl user [OPTIONS] COMMAND [ARGS]...
+// # gortctl user --help
+// Usage: gortctl user [OPTIONS] COMMAND [ARGS]...
 //
-//   Manage Cog users.
+//   Manage Gort users.
 //
 //   If invoked without a subcommand, lists all the users on the server.
 //

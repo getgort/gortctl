@@ -3,9 +3,9 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/clockworksoul/cog2/client"
+	"github.com/clockworksoul/gort/client"
 	"github.com/spf13/cobra"
-	yaml "gopkg.in/yaml.v2"
+	yaml "gopkg.in/yaml.v3"
 )
 
 const (
@@ -33,12 +33,12 @@ func bundleYamlCmd(cmd *cobra.Command, args []string) error {
 
 	// TODO Implement that no specifed version returns enabled version.
 
-	cogClient, err := client.Connect(FlagCogProfile)
+	gortClient, err := client.Connect(FlagGortProfile)
 	if err != nil {
 		return err
 	}
 
-	bundle, err := cogClient.BundleGet(name, version)
+	bundle, err := gortClient.BundleGet(name, version)
 	if err != nil {
 		return err
 	}

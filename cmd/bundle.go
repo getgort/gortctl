@@ -10,8 +10,8 @@ const (
 	bundleLong  = "Allows you to perform bundle administration."
 )
 
-// $ cogctl bundle --help
-// Usage: cogctl bundle [OPTIONS] COMMAND [ARGS]...
+// $ gortctl bundle --help
+// Usage: gortctl bundle [OPTIONS] COMMAND [ARGS]...
 
 //   Manage command bundles and their config.
 

@@ -10,10 +10,10 @@ const (
 	groupLong  = "Allows you to perform group administration."
 )
 
-// # cogctl group --help
-// Usage: cogctl group [OPTIONS] COMMAND [ARGS]...
+// # gortctl group --help
+// Usage: gortctl group [OPTIONS] COMMAND [ARGS]...
 //
-//   Manage Cog user groups.
+//   Manage Gort user groups.
 //
 //   If invoked without a subcommand, lists all user groups.
 //

@@ -3,8 +3,8 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/clockworksoul/cog2/client"
-	"github.com/clockworksoul/cog2/data/rest"
+	"github.com/clockworksoul/gort/client"
+	"github.com/clockworksoul/gort/data/rest"
 	"github.com/spf13/cobra"
 )
 
@@ -41,7 +41,7 @@ func GetUserUpdateCmd() *cobra.Command {
 func userUpdateCmd(cmd *cobra.Command, args []string) error {
 	username := args[0]
 
-	c, err := client.Connect(FlagCogProfile)
+	c, err := client.Connect(FlagGortProfile)
 	if err != nil {
 		return err
 	}

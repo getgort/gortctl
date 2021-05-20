@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/clockworksoul/cog2/client"
+	"github.com/clockworksoul/gort/client"
 	"github.com/spf13/cobra"
 )
 
@@ -40,7 +40,7 @@ func checkArgs(cmd *cobra.Command, args []string, argf cobra.PositionalArgs) err
 func groupInfoCmd(cmd *cobra.Command, args []string) error {
 	groupname := args[0]
 
-	cogClient, err := client.Connect(FlagCogProfile)
+	gortClient, err := client.Connect(FlagGortProfile)
 	if err != nil {
 		return err
 	}
@@ -50,7 +50,7 @@ func groupInfoCmd(cmd *cobra.Command, args []string) error {
 	// (when there's more than one)
 	//
 
-	users, err := cogClient.GroupMemberList(groupname)
+	users, err := gortClient.GroupMemberList(groupname)
 	if err != nil {
 		return err
 	}

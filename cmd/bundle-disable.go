@@ -3,7 +3,7 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/clockworksoul/cog2/client"
+	"github.com/clockworksoul/gort/client"
 	"github.com/spf13/cobra"
 )
 
@@ -30,7 +30,7 @@ func bundleDisableCmd(cmd *cobra.Command, args []string) error {
 	bundleName := args[0]
 	bundleVersion := args[1]
 
-	c, err := client.Connect(FlagCogProfile)
+	c, err := client.Connect(FlagGortProfile)
 	if err != nil {
 		return err
 	}

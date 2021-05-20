@@ -3,7 +3,7 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/clockworksoul/cog2/client"
+	"github.com/clockworksoul/gort/client"
 	"github.com/spf13/cobra"
 )
 
@@ -28,12 +28,12 @@ func GetUserListCmd() *cobra.Command {
 func userListCmd(cmd *cobra.Command, args []string) error {
 	const format = "%-10s%-20s%s\n"
 
-	cogClient, err := client.Connect(FlagCogProfile)
+	gortClient, err := client.Connect(FlagGortProfile)
 	if err != nil {
 		return err
 	}
 
-	users, err := cogClient.UserList()
+	users, err := gortClient.UserList()
 	if err != nil {
 		return err
 	}

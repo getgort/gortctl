@@ -3,7 +3,7 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/clockworksoul/cog2/client"
+	"github.com/clockworksoul/gort/client"
 	"github.com/spf13/cobra"
 )
 
@@ -27,21 +27,21 @@ func GetUserDeleteCmd() *cobra.Command {
 }
 
 func userDeleteCmd(cmd *cobra.Command, args []string) error {
-	cogClient, err := client.Connect(FlagCogProfile)
+	gortClient, err := client.Connect(FlagGortProfile)
 	if err != nil {
 		return err
 	}
 
 	username := args[0]
 
-	user, err := cogClient.UserGet(username)
+	user, err := gortClient.UserGet(username)
 	if err != nil {
 		return err
 	}
 
 	fmt.Printf("Deleting user %s (%s)... ", user.Username, user.Email)
 
-	err = cogClient.UserDelete(user.Username)
+	err = gortClient.UserDelete(user.Username)
 	if err != nil {
 		return err
 	}

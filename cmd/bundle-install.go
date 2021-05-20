@@ -3,8 +3,8 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/clockworksoul/cog2/bundle"
-	"github.com/clockworksoul/cog2/client"
+	"github.com/clockworksoul/gort/bundle"
+	"github.com/clockworksoul/gort/client"
 	"github.com/spf13/cobra"
 )
 
@@ -30,7 +30,7 @@ func GetBundleInstallCmd() *cobra.Command {
 func bundleInstallCmd(cmd *cobra.Command, args []string) error {
 	bundlefile := args[0]
 
-	c, err := client.Connect(FlagCogProfile)
+	c, err := client.Connect(FlagGortProfile)
 	if err != nil {
 		return err
 	}

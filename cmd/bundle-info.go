@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/clockworksoul/cog2/client"
-	"github.com/clockworksoul/cog2/data"
+	"github.com/clockworksoul/gort/client"
+	"github.com/clockworksoul/gort/data"
 	"github.com/spf13/cobra"
 )
 
@@ -49,12 +49,12 @@ func bundleInfoCmd(cmd *cobra.Command, args []string) error {
 }
 
 func doBundleInfoAll(name string) error {
-	cogClient, err := client.Connect(FlagCogProfile)
+	gortClient, err := client.Connect(FlagGortProfile)
 	if err != nil {
 		return err
 	}
 
-	bundles, err := cogClient.BundleListVersions(name)
+	bundles, err := gortClient.BundleListVersions(name)
 	if err != nil {
 		return err
 	}
@@ -92,12 +92,12 @@ func doBundleInfoAll(name string) error {
 }
 
 func doBundleInfoVersion(name, version string) error {
-	cogClient, err := client.Connect(FlagCogProfile)
+	gortClient, err := client.Connect(FlagGortProfile)
 	if err != nil {
 		return err
 	}
 
-	bundle, err := cogClient.BundleGet(name, version)
+	bundle, err := gortClient.BundleGet(name, version)
 	if err != nil {
 		return err
 	}

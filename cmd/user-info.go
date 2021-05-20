@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/clockworksoul/cog2/client"
+	"github.com/clockworksoul/gort/client"
 	"github.com/spf13/cobra"
 )
 
@@ -28,7 +28,7 @@ func GetUserInfoCmd() *cobra.Command {
 }
 
 func userInfoCmd(cmd *cobra.Command, args []string) error {
-	cogClient, err := client.Connect(FlagCogProfile)
+	gortClient, err := client.Connect(FlagGortProfile)
 	if err != nil {
 		return err
 	}
@@ -39,12 +39,12 @@ func userInfoCmd(cmd *cobra.Command, args []string) error {
 
 	username := args[0]
 
-	user, err := cogClient.UserGet(username)
+	user, err := gortClient.UserGet(username)
 	if err != nil {
 		return err
 	}
 
-	groups, err := cogClient.UserGroupList(username)
+	groups, err := gortClient.UserGroupList(username)
 	if err != nil {
 		return err
 	}

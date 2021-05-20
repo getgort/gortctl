@@ -6,24 +6,24 @@ import (
 	"os"
 	"reflect"
 
-	"github.com/clockworksoul/cog2/client"
-	cogerr "github.com/clockworksoul/cog2/errors"
-	"github.com/clockworksoul/cogctl2/cmd"
+	"github.com/clockworksoul/gort/client"
+	gorterr "github.com/clockworksoul/gort/errors"
+	"github.com/clockworksoul/gortctl/cmd"
 	"github.com/spf13/cobra"
 )
 
 const (
-	rootShort = "Cogctl is a CLI tool for administering a Cog2 chatops server installation"
+	rootShort = "Gortctl is a CLI tool for administering a gort chatops server installation"
 
-	rootLong = `Manage Cog via its REST API on the command line.
+	rootLong = `Manage Gort via its REST API on the command line.
 
 Did you find a bug or have a suggestion for a new feature? Create an issue at
-https://github.com/clockworksoul/cog2/issues.
+https://github.com/clockworksoul/gort/issues.
 `
 )
 
 var rootCmd = &cobra.Command{
-	Use:                        "cogctl",
+	Use:                        "gortctl",
 	Short:                      rootShort,
 	Long:                       rootLong,
 	Version:                    Version,
@@ -37,9 +37,9 @@ func init() {
 	rootCmd.AddCommand(cmd.GetBundleCmd())
 	rootCmd.AddCommand(cmd.GetGroupCmd())
 	rootCmd.AddCommand(cmd.GetUserCmd())
-	rootCmd.SetVersionTemplate("Cogctl version v" + Version + "\n")
+	rootCmd.SetVersionTemplate("Gortctl version v" + Version + "\n")
 
-	rootCmd.PersistentFlags().StringVarP(&cmd.FlagCogProfile, "profile", "P", "", "Cog profile to use")
+	rootCmd.PersistentFlags().StringVarP(&cmd.FlagGortProfile, "profile", "P", "", "Gort profile to use")
 }
 
 // Execute executes
@@ -54,15 +54,15 @@ func printErr(err error) error {
 	var msg string
 
 	switch {
-	case reflect.TypeOf(err) == reflect.TypeOf(cogerr.NestedError{}):
-		nerr := err.(cogerr.NestedError)
+	case reflect.TypeOf(err) == reflect.TypeOf(gorterr.NestedError{}):
+		nerr := err.(gorterr.NestedError)
 		fmt.Fprintln(os.Stderr, "Error:", nerr.Message)
 
 		if true { // TODO Add "verbose" flag
 			suberr := nerr.Err
 
-			for reflect.TypeOf(suberr) == reflect.TypeOf(cogerr.NestedError{}) {
-				nerr = suberr.(cogerr.NestedError)
+			for reflect.TypeOf(suberr) == reflect.TypeOf(gorterr.NestedError{}) {
+				nerr = suberr.(gorterr.NestedError)
 				suberr = nerr.Err
 
 				fmt.Fprintf(os.Stderr, "Caused by: %s\n", nerr.Message)

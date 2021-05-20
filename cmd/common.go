@@ -1,12 +1,12 @@
 package cmd
 
 import (
-	"github.com/clockworksoul/cog2/data/rest"
+	"github.com/clockworksoul/gort/data/rest"
 )
 
 var (
-	// FlagCogProfile is a persistent flag
-	FlagCogProfile string
+	// FlagGortProfile is a persistent flag
+	FlagGortProfile string
 )
 
 func groupNames(groups []rest.Group) []string {
