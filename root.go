@@ -13,12 +13,12 @@ import (
 )
 
 const (
-	rootShort = "Gortctl is a CLI tool for administering a gort chatops server installation"
+	rootShort = "Gortctl is a CLI tool for administering a Gort chatops controller installation"
 
 	rootLong = `Manage Gort via its REST API on the command line.
 
 Did you find a bug or have a suggestion for a new feature? Create an issue at
-https://github.com/clockworksoul/gort/issues.
+https://github.com/getgort/gort/issues.
 `
 )
 
