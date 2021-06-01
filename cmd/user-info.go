@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/clockworksoul/gort/client"
+	"github.com/getgort/gort/client"
 	"github.com/spf13/cobra"
 )
 

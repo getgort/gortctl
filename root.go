@@ -6,9 +6,9 @@ import (
 	"os"
 	"reflect"
 
-	"github.com/clockworksoul/gort/client"
-	gorterr "github.com/clockworksoul/gort/errors"
-	"github.com/clockworksoul/gortctl/cmd"
+	"github.com/getgort/gort/client"
+	gorterr "github.com/getgort/gort/errors"
+	"github.com/getgort/gortctl/cmd"
 	"github.com/spf13/cobra"
 )
 

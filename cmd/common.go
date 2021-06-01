@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"github.com/clockworksoul/gort/data/rest"
+	"github.com/getgort/gort/data/rest"
 )
 
 var (

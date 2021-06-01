@@ -3,8 +3,8 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/clockworksoul/gort/bundle"
-	"github.com/clockworksoul/gort/client"
+	"github.com/getgort/gort/bundle"
+	"github.com/getgort/gort/client"
 	"github.com/spf13/cobra"
 )
 

@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/clockworksoul/gort/client"
-	"github.com/clockworksoul/gort/data"
+	"github.com/getgort/gort/client"
+	"github.com/getgort/gort/data"
 	"github.com/spf13/cobra"
 )
 
