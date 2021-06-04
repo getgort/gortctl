@@ -13,6 +13,14 @@ const (
 	bundleDisableLong  = "Disable a bundle."
 )
 
+// cogctl bundle disable --help
+// Usage: cogctl bundle disable [OPTIONS] NAME
+
+//   Disable a bundle by name.
+
+// Options:
+//   --help  Show this message and exit.
+
 // GetBundleDisableCmd is a command
 func GetBundleDisableCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -40,7 +48,7 @@ func bundleDisableCmd(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
-	fmt.Printf("Bundle %s v%s version disabled.\n", bundleName, bundleVersion)
+	fmt.Printf("Bundle \"%s\" disabled.\n", bundleName)
 
 	return nil
 }

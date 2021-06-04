@@ -31,7 +31,7 @@ func bundleYamlCmd(cmd *cobra.Command, args []string) error {
 	name := args[0]
 	version := args[1]
 
-	// TODO Implement that no specifed version returns enabled version.
+	// TODO Implement that no specified version returns enabled version.
 
 	gortClient, err := client.Connect(FlagGortProfile)
 	if err != nil {

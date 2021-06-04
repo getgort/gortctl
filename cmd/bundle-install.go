@@ -3,7 +3,7 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/getgort/gort/bundle"
+	"github.com/getgort/gort/bundles"
 	"github.com/getgort/gort/client"
 	"github.com/spf13/cobra"
 )
@@ -35,7 +35,7 @@ func bundleInstallCmd(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
-	bundle, err := bundle.LoadBundle(bundlefile)
+	bundle, err := bundles.LoadBundle(bundlefile)
 	if err != nil {
 		return err
 	}

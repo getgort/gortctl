@@ -40,7 +40,7 @@ func GetBundleListCmd() *cobra.Command {
 }
 
 func bundleListCmd(cmd *cobra.Command, args []string) error {
-	const format = "%-12s%-10s%s\n"
+	const format = "%-12s%-12s%-12s%s\n"
 
 	gortClient, err := client.Connect(FlagGortProfile)
 	if err != nil {
@@ -52,16 +52,24 @@ func bundleListCmd(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
-	fmt.Printf(format, "BUNDLE", "VERSION", "STATUS")
+	fmt.Printf(format, "BUNDLE", "VERSION", "TYPE", "STATUS")
 
 	for _, b := range bundles {
-		status := "Disabled"
+		if b.Version == "" {
+			b.Version = "-"
+		}
 
+		status := "Disabled"
 		if b.Enabled {
 			status = "Enabled"
 		}
 
-		fmt.Printf(format, b.Name, b.Version, status)
+		kind := "Explicit"
+		if b.Default {
+			kind = "Default"
+		}
+
+		fmt.Printf(format, b.Name, b.Version, kind, status)
 	}
 
 	return nil

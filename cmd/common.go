@@ -10,7 +10,7 @@ var (
 )
 
 func groupNames(groups []rest.Group) []string {
-	names := make([]string, 0, 0)
+	names := make([]string, 0)
 
 	for _, g := range groups {
 		names = append(names, g.Name)
@@ -20,7 +20,7 @@ func groupNames(groups []rest.Group) []string {
 }
 
 func userNames(users []rest.User) []string {
-	names := make([]string, 0, 0)
+	names := make([]string, 0)
 
 	for _, u := range users {
 		names = append(names, u.Username)

@@ -27,16 +27,6 @@ func GetGroupInfoCmd() *cobra.Command {
 	return cmd
 }
 
-func checkArgs(cmd *cobra.Command, args []string, argf cobra.PositionalArgs) error {
-	var err error
-
-	if args != nil {
-		err = argf(cmd, args)
-	}
-
-	return err
-}
-
 func groupInfoCmd(cmd *cobra.Command, args []string) error {
 	groupname := args[0]
 

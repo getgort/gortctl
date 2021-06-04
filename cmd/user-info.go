@@ -34,7 +34,7 @@ func userInfoCmd(cmd *cobra.Command, args []string) error {
 	}
 
 	//
-	// TODO Maybe multiplex the following queries with gofuncs?
+	// TODO Maybe multiplex the following queries with goroutines?
 	//
 
 	username := args[0]
