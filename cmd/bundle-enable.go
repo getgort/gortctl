@@ -40,7 +40,7 @@ func bundleEnableCmd(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
-	fmt.Printf("Bundle %s v%s version enabled.\n", bundleName, bundleVersion)
+	fmt.Printf("Bundle \"%s\" version %s enabled.\n", bundleName, bundleVersion)
 
 	return nil
 }

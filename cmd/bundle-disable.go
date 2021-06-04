@@ -28,7 +28,7 @@ func GetBundleDisableCmd() *cobra.Command {
 		Short: bundleDisableShort,
 		Long:  bundleDisableLong,
 		RunE:  bundleDisableCmd,
-		Args:  cobra.ExactArgs(2),
+		Args:  cobra.ExactArgs(1),
 	}
 
 	return cmd
@@ -36,14 +36,13 @@ func GetBundleDisableCmd() *cobra.Command {
 
 func bundleDisableCmd(cmd *cobra.Command, args []string) error {
 	bundleName := args[0]
-	bundleVersion := args[1]
 
 	c, err := client.Connect(FlagGortProfile)
 	if err != nil {
 		return err
 	}
 
-	err = c.BundleDisable(bundleName, bundleVersion)
+	err = c.BundleDisable(bundleName)
 	if err != nil {
 		return err
 	}
