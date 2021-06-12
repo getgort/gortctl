@@ -42,7 +42,7 @@ var (
 	flagBootstrapEmail    string
 	flagBootstrapName     string
 	flagBootstrapPassword string
-	allowInsecure         *bool
+	flagAllowInsecure     bool
 )
 
 // GetBootstrapCmd bootstrap
@@ -58,7 +58,7 @@ func GetBootstrapCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&flagBootstrapEmail, "email", "e", "admin@gort", "Email for the bootstrapped user")
 	cmd.Flags().StringVarP(&flagBootstrapName, "name", "n", "Gort Administrator", "Full name of the bootstrapped user")
 	cmd.Flags().StringVarP(&flagBootstrapPassword, "password", "p", "", "Password for bootstrapped user (default generated)")
-	allowInsecure = cmd.Flags().Bool("allow_insecure", false, "Permit http URLs to be used")
+	cmd.Flags().BoolVarP(&flagAllowInsecure, "allow-insecure", "i", false, "Permit http URLs to be used")
 
 	cmd.SetUsageTemplate(bootstrapUsage)
 
@@ -69,7 +69,7 @@ func bootstrapCmd(cmd *cobra.Command, args []string) error {
 	entry := client.ProfileEntry{
 		Name:          FlagGortProfile,
 		URLString:     args[0],
-		AllowInsecure: *allowInsecure,
+		AllowInsecure: flagAllowInsecure,
 	}
 
 	gortClient, err := client.ConnectWithNewProfile(entry)
