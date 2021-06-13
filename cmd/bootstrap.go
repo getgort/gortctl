@@ -3,9 +3,10 @@ package cmd
 import (
 	"fmt"
 
+	"github.com/spf13/cobra"
+
 	"github.com/getgort/gort/client"
 	"github.com/getgort/gort/data/rest"
-	"github.com/spf13/cobra"
 )
 
 const (
@@ -41,6 +42,7 @@ var (
 	flagBootstrapEmail    string
 	flagBootstrapName     string
 	flagBootstrapPassword string
+	flagAllowInsecure     bool
 )
 
 // GetBootstrapCmd bootstrap
@@ -56,6 +58,7 @@ func GetBootstrapCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&flagBootstrapEmail, "email", "e", "admin@gort", "Email for the bootstrapped user")
 	cmd.Flags().StringVarP(&flagBootstrapName, "name", "n", "Gort Administrator", "Full name of the bootstrapped user")
 	cmd.Flags().StringVarP(&flagBootstrapPassword, "password", "p", "", "Password for bootstrapped user (default generated)")
+	cmd.Flags().BoolVarP(&flagAllowInsecure, "allow-insecure", "i", false, "Permit http URLs to be used")
 
 	cmd.SetUsageTemplate(bootstrapUsage)
 
@@ -64,8 +67,9 @@ func GetBootstrapCmd() *cobra.Command {
 
 func bootstrapCmd(cmd *cobra.Command, args []string) error {
 	entry := client.ProfileEntry{
-		Name:      FlagGortProfile,
-		URLString: args[0],
+		Name:          FlagGortProfile,
+		URLString:     args[0],
+		AllowInsecure: flagAllowInsecure,
 	}
 
 	gortClient, err := client.ConnectWithNewProfile(entry)
