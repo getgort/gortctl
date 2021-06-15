@@ -3,6 +3,10 @@
 `gortctl` is a CLI tool for administering a
 [Gort](https://github.com/getgort/gort) chatops server installation.
 
+## Deprecated
+
+**All `gortctl` functionality has been integrated into the [Gort controller binary](https://github.com/getgort/gort). This reposisitory -- and the `gortctl` command -- are now deprecated.**
+
 # Configuring
 
 `gortctl` uses an INI-formatted configuration file, conventionally
